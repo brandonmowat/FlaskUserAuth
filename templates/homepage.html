@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_field %}
+
+{% block content %}
+<div class="main homepage">
+{%if not current_user.is_authenticated() %}
+  <div class="text-center">
+    <h3>Uh oh! You're not logged in.</h3>
+    <a href="{{ url_for('login') }}" class="btn">Log in</a>
+    <a href="{{ url_for('register') }}" class="btn">sign up</a>
+  </div>
+{%else%}
+<div class="jumbotron">
+  <div class="container">
+    <h1></h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+  </div>
+</div>
+{%endif%}
+</div>
+{%endblock%}

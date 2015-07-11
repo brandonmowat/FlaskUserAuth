@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}Designr{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type='text/css' href="/static/css/main.css">
+
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="/static/js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+
+
+      <nav class="navbar navbar-default navbar-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Designr</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              {% if current_user.is_authenticated() %}
+                <li><a href="#">{{current_user.username}}</a></li>
+                <li><a href="{{ url_for('logout') }}" class="icon-power" title="Log out">Logout</a></li>
+              {% else %}
+                <li><a href="{{ url_for('login') }}" class="icon-power" title="Log in"> Login</a></li>
+                <li><a href="{{ url_for('register') }}" class="icon-profile" title="Register">Sign up</a></li>
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="notification {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+      </nav>
+
+
+        {% block content %}{% endblock %}
+
+
+      <footer>
+
+        <div class="container">
+
+          <p>An App built with Flask<br>by Brandon</p>
+
+        </div>
+
+      </footer>
+
+
+    </body>
+</html>
